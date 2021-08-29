@@ -1163,7 +1163,14 @@ class petkit_feeder_plugin {
                 this.log.info(format('drop food:{} meal(s)', petkitDevice.savedData.mealAmount));
 
                 var result = false;
-                this.http_saveDailyFeed(petkitDevice, petkitDevice.savedData.mealAmount, -1)
+                var timeOfStatus = -1;
+                if (petkitDevice.status.batteryStatus === 1) {
+                    const startOfToday = new Date(new Date().toLocaleDateString()).getTime()
+                    const currentTimeStamp = Date.parse(new Date());
+                    timeOfStatus = currentTimeStamp / 1000 - startOfToday / 1000
+                    this.log.info('this is battery mode , so .. delay to feed' + timeOfStatus)
+                } 
+                this.http_saveDailyFeed(petkitDevice, petkitDevice.savedData.mealAmount, timeOfStatus + 600)
                     .then(data => {
                         if (!data) {
                             this.log.error('failed to commuciate with server.');
