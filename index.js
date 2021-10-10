@@ -1171,7 +1171,6 @@ class petkit_feeder_plugin {
                     timeOfStatus + 600
                     this.log.info('this is battery mode , so .. delay to feed' + timeOfStatus)
                 } else {
-                    timeOfStatus = 0
                     this.log.info('this is not battery mode')
                 } 
                 this.http_saveDailyFeed(petkitDevice, petkitDevice.savedData.mealAmount, timeOfStatus)
