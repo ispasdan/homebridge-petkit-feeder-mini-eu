@@ -6,7 +6,11 @@
 
 - if you are a Petkit Feeder Element user and want to use this plugin, plseas install v2.x.x or above, v1.x.x is not compatible with Petkit Feeder Element.
 
+## 電池模式
 
+原作者並沒有打算支援電池模式，所以
+- 當你使用電池模式的時候，延遲10分鐘放飯
+- 當你使用充電模式的時候就恢復原本立即出糧
 
 ## homebridge-petkit-feeder-mini
 
