@@ -1,6 +1,6 @@
 {
   "name": "homebridge-petkit-feeder-mini-battery",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "control your petkit feeder mini to feed your lovely pet. battery mode, it can be used but ten minutes later",
   "main": "index.js",
   "scripts": {
