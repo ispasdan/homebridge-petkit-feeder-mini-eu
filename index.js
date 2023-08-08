@@ -19,8 +19,8 @@ const globalVariables = Object.freeze({
         'FeederMini'                        // Petkit Feeder Mini
     ],
     'support_settings': {
-        'manualLock' : 'settings.manualLock',      // 1 for off, 0 for on
-        'lightMode' : 'settings.lightMode',
+        'manualLock': 'settings.manualLock',      // 1 for off, 0 for on
+        'lightMode': 'settings.lightMode',
     },
     'default_headers': {
         'X-Client': 'ios(14.0;iPhone12,3)',
@@ -38,7 +38,7 @@ const globalVariables = Object.freeze({
         'method': 'POST',
         'timeout': 5000,
         'responseType': 'json',
-        'retry' : {
+        'retry': {
             'enabled': true,
             'max_retry': 3,                 // http request retry count
         }
@@ -57,7 +57,7 @@ const globalVariables = Object.freeze({
                 'resetDesiccant': 'http://api.petkit.cn/6/feeder/desiccant_reset?deviceId={}',
                 'updateSettings': 'http://api.petkit.cn/6/feeder/update?id={}&kv={}',
             },
-            'asia':{
+            'asia': {
                 'owndevices': 'http://api.petktasia.com/latest/discovery/device_roster',
                 'deviceState': 'http://api.petktasia.com/latest/feeder/devicestate?id={}',
                 'deviceDetailInfo': 'http://api.petktasia.com/latest/feeder/device_detail?id={}',
@@ -69,7 +69,7 @@ const globalVariables = Object.freeze({
                 'resetDesiccant': 'http://api.petktasia.com/latest/feeder/desiccant_reset?deviceId={}',
                 'updateSettings': 'http://api.petktasia.com/latest/feeder/update?id={}&kv={}',
             },
-            'north_america':{
+            'north_america': {
                 'owndevices': 'http://api.petkt.com/latest/discovery/device_roster',
                 'deviceState': 'http://api.petkt.com/latest/feeder/devicestate?id={}',
                 'deviceDetail': 'http://api.petkt.com/latest/feeder/device_detail?id={}',
@@ -80,6 +80,18 @@ const globalVariables = Object.freeze({
                 'disableDailyFeeds': 'http://api.petkt.com/latest/feeder/remove_dailyfeed?deviceId={}&day={}&id=s{}',
                 'resetDesiccant': 'http://api.petkt.com/latest/feeder/desiccant_reset?deviceId={}',
                 'updateSettings': 'http://api.petkt.com/latest/feeder/update?id={}&kv={}',
+            },
+            'eu': {
+                'owndevices': 'http://api.eu-pet.com/latest/discovery/device_roster',
+                'deviceState': 'http://api.eu-pet.com/latest/feeder/devicestate?id={}',
+                'deviceDetail': 'http://api.eu-pet.com/latest/feeder/device_detail?id={}',
+                'saveDailyFeed': 'http://api.eu-pet.com/latest/feeder/save_dailyfeed?deviceId={}&day={}&time={}&amount={}',
+                'removeDailyFeed': 'http://api.eu-pet.com/latest/feeder/remove_dailyfeed?deviceId={}&day={}&id=d{}',
+                'dailyfeeds': 'http://api.eu-pet.com/latest/feeder/dailyfeeds?deviceId={}&days={}',
+                'restoreDailyFeeds': 'http://api.eu-pet.com/latest/feeder/restore_dailyfeed?deviceId={}&day={}&id=s{}',
+                'disableDailyFeeds': 'http://api.eu-pet.com/latest/feeder/remove_dailyfeed?deviceId={}&day={}&id=s{}',
+                'resetDesiccant': 'http://api.eu-pet.com/latest/feeder/desiccant_reset?deviceId={}',
+                'updateSettings': 'http://api.eu-pet.com/latest/feeder/update?id={}&kv={}',
             }
         },
         'FeederMini': {
@@ -95,7 +107,7 @@ const globalVariables = Object.freeze({
                 'resetDesiccant': 'http://api.petkit.cn/6/feedermini/desiccant_reset?deviceId={}',
                 'updateSettings': 'http://api.petkit.cn/6/feedermini/update?id={}&kv={}',
             },
-            'asia':{
+            'asia': {
                 'owndevices': 'http://api.petktasia.com/latest/discovery/device_roster',
                 'deviceState': 'http://api.petktasia.com/latest/feedermini/devicestate?id={}',
                 'deviceDetailInfo': 'http://api.petktasia.com/latest/feedermini/device_detail?id={}',
@@ -107,7 +119,7 @@ const globalVariables = Object.freeze({
                 'resetDesiccant': 'http://api.petktasia.com/latest/feedermini/desiccant_reset?deviceId={}',
                 'updateSettings': 'http://api.petktasia.com/latest/feedermini/update?id={}&kv={}',
             },
-            'north_america':{
+            'north_america': {
                 'owndevices': 'http://api.petkt.com/latest/discovery/device_roster',
                 'deviceState': 'http://api.petkt.com/latest/feedermini/devicestate?id={}',
                 'deviceDetailInfo': 'http://api.petkt.com/latest/feedermini/device_detail?id={}',
@@ -118,6 +130,18 @@ const globalVariables = Object.freeze({
                 'disableDailyFeeds': 'http://api.petkt.com/latest/feedermini/remove_dailyfeed?deviceId={}&day={}&id=s{}',
                 'resetDesiccant': 'http://api.petkt.com/latest/feedermini/desiccant_reset?deviceId={}',
                 'updateSettings': 'http://api.petkt.com/latest/feedermini/update?id={}&kv={}',
+            },
+            'eu': {
+                'owndevices': 'http://api.eu-pet.com/latest/discovery/device_roster',
+                'deviceState': 'http://api.eu-pet.com/latest/feedermini/devicestate?id={}',
+                'deviceDetailInfo': 'http://api.eu-pet.com/latest/feedermini/device_detail?id={}',
+                'saveDailyFeed': 'http://api.eu-pet.com/latest/feedermini/save_dailyfeed?deviceId={}&day={}&time={}&amount={}',
+                'removeDailyFeed': 'http://api.eu-pet.com/latest/feedermini/remove_dailyfeed?deviceId={}&day={}&id=d{}',
+                'dailyfeeds': 'http://api.eu-pet.com/latest/feedermini/dailyfeeds?deviceId={}&days={}',
+                'restoreDailyFeeds': 'http://api.eu-pet.com/latest/feedermini/restore_dailyfeed?deviceId={}&day={}&id=s{}',
+                'disableDailyFeeds': 'http://api.eu-pet.com/latest/feedermini/remove_dailyfeed?deviceId={}&day={}&id=s{}',
+                'resetDesiccant': 'http://api.eu-pet.com/latest/feedermini/desiccant_reset?deviceId={}',
+                'updateSettings': 'http://api.eu-pet.com/latest/feedermini/update?id={}&kv={}',
             }
         }
     },
@@ -137,7 +161,7 @@ const globalVariables = Object.freeze({
 });
 
 class PetkitFeederDevice {
-    constructor() {
+    constructor () {
         let accessory = undefined;
         this.config = undefined;
         this.events = {
@@ -154,10 +178,10 @@ class PetkitFeederDevice {
         };
         this.status = {     // petkit status value
             'lastUpdate': 0,
-            'food' : 0,                 // this.config.get('reverse_foodStorage_indicator') ? !petkitDevice.status.food : petkitDevice.status.food
-            'batteryPower': 0,  
+            'food': 0,                 // this.config.get('reverse_foodStorage_indicator') ? !petkitDevice.status.food : petkitDevice.status.food
+            'batteryPower': 0,
             'batteryStatus': 1,
-            'desiccantLeftDays' : 0,    // petkitDevice.status.desiccantLeftDays < petkitDevice.config.get('alert_desiccant_threshold') ? 1 : 0
+            'desiccantLeftDays': 0,    // petkitDevice.status.desiccantLeftDays < petkitDevice.config.get('alert_desiccant_threshold') ? 1 : 0
             'manualLock': 0,
             'lightMode': 0,
             'meals': {}
@@ -219,7 +243,7 @@ function getDataString() {
 }
 
 class petkit_feeder_plugin {
-    constructor(log, config, api) {
+    constructor (log, config, api) {
         this.log = new logUtil(log, config.log_level || logUtil.LOGLV_INFO);
         this.log.info('begin to initialize Petkit Feeder Platform.');
 
@@ -262,10 +286,10 @@ class petkit_feeder_plugin {
             let header = headers.find(header => header.key == key);
             if (undefined === header) {
                 this.log.debug(format('missing header: {0}, using \'{1}\' instead.', key, value));
-                headers.push({'key': key, 'value': value});
+                headers.push({ 'key': key, 'value': value });
             } else if ('' === header) {
                 this.log.warn(format('header \'{0}\' value is empty, using \'{1}\' instead.', key, value));
-                headers.push({'key': key, 'value': value});
+                headers.push({ 'key': key, 'value': value });
             }
         };
 
@@ -349,7 +373,7 @@ class petkit_feeder_plugin {
         conf.fulfill('Battery_name', 'Battery');
 
         // print config log
-        conf.print(content => {this.log.debug(content)});
+        conf.print(content => { this.log.debug(content) });
 
         return conf;
     }
@@ -592,7 +616,7 @@ class petkit_feeder_plugin {
                         if (!user_deviceId || owned_devices[0].id == user_deviceId) {
                             this.log.info(format('found you ownd one {} with deviceId: {}.', owned_devices[0].type, owned_devices[0].id));
                         } else {
-                            this.log.warn(format('found you just ownd one {} with deviceId: ', owned_devices[0].type , owned_devices[0].id));
+                            this.log.warn(format('found you just ownd one {} with deviceId: ', owned_devices[0].type, owned_devices[0].id));
                             this.log.warn(format('which is not the same with the deviceId you set: {}', user_deviceId));
                             this.log.warn(format('will use {} instead', owned_devices[0].id));
                         }
@@ -661,17 +685,17 @@ class petkit_feeder_plugin {
                     if (deviceDetailInfo) {
                         petkitDevice.config.set('sn', deviceDetailInfo.sn);
                         petkitDevice.config.set('firmware', deviceDetailInfo.firmware);
-                        petkitDevice.config.assign('headers', {key: 'X-TimezoneId', value: deviceDetailInfo.locale})
-    
+                        petkitDevice.config.assign('headers', { key: 'X-TimezoneId', value: deviceDetailInfo.locale })
+
                         if (this.setupAccessory(petkitDevice)) {
                             // all service setup success, now update accessory
                             if (!this.accessories.get(uuid)) {
                                 this.api.registerPlatformAccessories(pluginName, platformName, [petkitDevice.accessory]);
                             }
                             this.accessories.set(uuid, petkitDevice.accessory);
-    
+
                             this.log.info(format('initialize Petkit Feeder device({}) success.', config.get('name')));
-    
+
                             // polling
                             this.setupPolling(petkitDevice);
                         } else {
@@ -717,7 +741,7 @@ class petkit_feeder_plugin {
         jsonObj.result.devices.forEach(device => {
             const index = globalVariables.support_device_type.indexOf(device.type);
             if (index !== -1 && device.data) {
-                valid_devices.push(Object.assign(device.data, {'type': device.type}));
+                valid_devices.push(Object.assign(device.data, { 'type': device.type }));
             }
         });
         return valid_devices;
@@ -767,7 +791,7 @@ class petkit_feeder_plugin {
 
         if (deviceInfo.state.desiccantLeftDays !== undefined) deviceDetailInfo.status.desiccantLeftDays = deviceInfo.state.desiccantLeftDays;
         // this.log.debug('device desiccant remain: ' + (deviceDetailInfo.status.desiccantLeftDays + ' day(s)'));
-        
+
         // 0 for unlocked, 1 for locked
         if (deviceInfo.settings.manualLock !== undefined) deviceDetailInfo.status.manualLock = deviceInfo.settings.manualLock;
         // this.log.debug('device manual lock status is: ' + (deviceDetailInfo.status.manualLock ? 'unlocked' : 'locked'));
@@ -832,14 +856,14 @@ class petkit_feeder_plugin {
                 axios.request(options)
                     .then(response => {
                         if (response.status != 200) {
-                            result = {error: 'http request received a invalid response code: ' + response.status};
+                            result = { error: 'http request received a invalid response code: ' + response.status };
                         } else {
                             this.log.debug('http request success')
-                            result = {data: response.data};
+                            result = { data: response.data };
                         }
                     })
                     .catch(error => {
-                        result = {error: 'http request failed: ' + error};
+                        result = { error: 'http request failed: ' + error };
                     })
                     .then(() => {
                         resolve(result);
@@ -980,21 +1004,21 @@ class petkit_feeder_plugin {
     async http_getDeviceDetailStatus(petkitDevice, callback) {
         let deviceDetailInfo = undefined;
         this.http_getDeviceInfo(petkitDevice)
-        .then(device_detail_raw => {
-            deviceDetailInfo = this.praseGetDeviceDetailInfo(device_detail_raw);
-        })
-        .catch(error => {
-            this.log.error(format('unable to get device({}) status: {}', petkitDevice.config.get('deviceId'), error));
-        })
-        .then(() => {
-            if (deviceDetailInfo) {
-                petkitDevice.status = Object.assign(petkitDevice.status, deviceDetailInfo.status);
-                petkitDevice.status.lastUpdate = getTimestamp();
-            }
-            if (callback) callback(deviceDetailInfo);
-        });
+            .then(device_detail_raw => {
+                deviceDetailInfo = this.praseGetDeviceDetailInfo(device_detail_raw);
+            })
+            .catch(error => {
+                this.log.error(format('unable to get device({}) status: {}', petkitDevice.config.get('deviceId'), error));
+            })
+            .then(() => {
+                if (deviceDetailInfo) {
+                    petkitDevice.status = Object.assign(petkitDevice.status, deviceDetailInfo.status);
+                    petkitDevice.status.lastUpdate = getTimestamp();
+                }
+                if (callback) callback(deviceDetailInfo);
+            });
     }
-    
+
     uploadStatusToHomebridge(petkitDevice) {
         let service = undefined;
         let service_status = undefined;
@@ -1002,14 +1026,14 @@ class petkit_feeder_plugin {
         this.log.debug(JSON.stringify(petkitDevice.status));
 
         // battery service only for Petkit Feeder Mini
-        if (petkitDevice.config.get('model') === 'FeederMini') {        
+        if (petkitDevice.config.get('model') === 'FeederMini') {
             // battery
             service = petkitDevice.services.battery_status_service;
             // battery level
             service_status = petkitDevice.status.batteryPower * globalVariables.config.batteryPersentPerLevel;
             this.log.info(format('battery level is {}%.', service_status));
             service.setCharacteristic(Characteristic.BatteryLevel, service_status);
-            
+
             // charging state
             if (petkitDevice.status.batteryStatus === 0) {
                 service_status = Characteristic.ChargingState.CHARGING;
@@ -1071,7 +1095,7 @@ class petkit_feeder_plugin {
                 this.log.warn('there is not enough food left !!!');
             }
         }
-        else if(petkitDevice.config.get('model') === 'FeederMini') {
+        else if (petkitDevice.config.get('model') === 'FeederMini') {
             if (petkitDevice.status.food == 0) {
                 this.log.warn('there is not enough food left !!!');
             } else {
@@ -1112,7 +1136,7 @@ class petkit_feeder_plugin {
                 interval: polling_interval_ms,
                 longpollEventName: 'deviceStatusUpdatePoll'
             };
-    
+
             setTimeout(() => {
                 petkitDevice.events.polling_event = pollingtoevent(done => {
                     this.log.info('polling start...');
@@ -1172,7 +1196,7 @@ class petkit_feeder_plugin {
                     this.log.info('this is battery mode , so .. delay to feed' + timeOfStatus)
                 } else {
                     this.log.info('this is not battery mode')
-                } 
+                }
                 this.http_saveDailyFeed(petkitDevice, petkitDevice.savedData.mealAmount, timeOfStatus)
                     .then(data => {
                         if (!data) {
@@ -1191,7 +1215,7 @@ class petkit_feeder_plugin {
             } else {
                 this.log.info('drop food with zero amount, pass.');
             }
-            
+
             setTimeout(() => {
                 petkitDevice.services.drop_meal_service.setCharacteristic(Characteristic.On, false);
             }, 200);
@@ -1218,7 +1242,7 @@ class petkit_feeder_plugin {
     // reset Desiccant Left Days 
     hb_desiccantLeftDays_reset(petkitDevice, callback) {
         const fast_response = petkitDevice.config.get('fast_response');
-        if (fast_response && callback) {callback(null);}
+        if (fast_response && callback) { callback(null); }
         this.http_resetDesiccant(petkitDevice)
             .then(data => {
                 if (data && data.result) {
