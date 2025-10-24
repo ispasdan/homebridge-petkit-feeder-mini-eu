@@ -1,5 +1,7 @@
 ## Important note!!!
 
+- **Homebridge 2.0 Ready**: This plugin is fully compatible with Homebridge 2.0. No code changes are required - simply update to the latest version.
+
 - if you are aready a plugin user, and have trouble when upgrade to v2.x.x from v1.x.x, please first consider update and double check your config.json.
 
   you can find out how to update your config.json [here](https://github.com/elfive/homebridge-petkit-feeder-mini/wiki/How-to-convert-v1.x.x-config-to-v2.x.x).
