@@ -1,5 +1,7 @@
 ## Important note!!!
 
+- **Homebridge 2.0 Ready**: This plugin is fully compatible with Homebridge 2.0. No code changes are required - simply update to the latest version.
+
 - if you are aready a plugin user, and have trouble when upgrade to v2.x.x from v1.x.x, please first consider update and double check your config.json.
 
   you can find out how to update your config.json [here](https://github.com/elfive/homebridge-petkit-feeder-mini/wiki/How-to-convert-v1.x.x-config-to-v2.x.x).
@@ -59,7 +61,7 @@ control your petkit feeder mini from homekit, get full use of iOS automation.
 
 Goto App Store, download Petkit mobile app, register, login, add device. before use this plugin you <strong>MUST</strong> make sure the app works fine with you.
 
-- for China mainland users, download “小佩宠物”
+- for China mainland users, download "PetKit" app
 - for those Asia users outside China mainland, you should download "PetKit(International)"
 - for users not from Asia, like America, Europe, etc. you also should download "PetKit(International)", but the API url address may not the same, this plugin may or may not works with you, if you are experienced in network, you could use "Quantumult X" to capture app network records, submit the api address to me or just create a PR or just modify this plugin for your own.
 
