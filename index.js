@@ -83,6 +83,7 @@ const globalVariables = Object.freeze({
             },
             'eu': {
                 'owndevices': 'http://api.eu-pet.com/latest/discovery/device_roster',
+                'owndevices_v2': 'https://api.eu-pet.com/latest/discovery/device_roster_v2',
                 'deviceState': 'http://api.eu-pet.com/latest/feeder/devicestate?id={}',
                 'deviceDetail': 'http://api.eu-pet.com/latest/feeder/device_detail?id={}',
                 'saveDailyFeed': 'http://api.eu-pet.com/latest/feeder/save_dailyfeed?deviceId={}&day={}&time={}&amount={}',
@@ -133,6 +134,7 @@ const globalVariables = Object.freeze({
             },
             'eu': {
                 'owndevices': 'http://api.eu-pet.com/latest/discovery/device_roster',
+                'owndevices_v2': 'https://api.eu-pet.com/latest/discovery/device_roster_v2',
                 'deviceState': 'http://api.eu-pet.com/latest/feedermini/devicestate?id={}',
                 'deviceDetailInfo': 'http://api.eu-pet.com/latest/feedermini/device_detail?id={}',
                 'saveDailyFeed': 'http://api.eu-pet.com/latest/feedermini/save_dailyfeed?deviceId={}&day={}&time={}&amount={}',
@@ -899,13 +901,33 @@ class petkit_feeder_plugin {
     }
 
     async http_getOwnDevice(config) {
-        const url = config.get('urls').owndevices;
-        const options = Object.assign(globalVariables.default_http_options, {
-            url: url,
-            headers: config.get('headers'),
-            responseType: 'json'
-        });
-        return await this.http_request(options);
+        const urls = config.get('urls');
+        const discovery_urls = [];
+
+        if (urls.owndevices_v2) {
+            discovery_urls.push(urls.owndevices_v2);
+        }
+        if (urls.owndevices) {
+            discovery_urls.push(urls.owndevices);
+        }
+
+        for (const url of discovery_urls) {
+            this.log.debug(format('trying device discovery endpoint: {}', url));
+            const options = Object.assign(globalVariables.default_http_options, {
+                url: url,
+                headers: config.get('headers'),
+                responseType: 'json'
+            });
+            const result = await this.http_request(options);
+            if (result) {
+                this.log.info(format('device discovery succeeded via: {}', url));
+                return result;
+            }
+            this.log.warn(format('device discovery returned no data from: {}', url));
+        }
+
+        this.log.error('device discovery failed for all configured endpoints.');
+        return undefined;
     }
 
     async http_getDeviceInfo(petkitDevice) {
