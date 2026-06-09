@@ -77,6 +77,7 @@ Be aware of that, to minimize the effect to the Petkit server with unnecessary h
 
 - X-Session: this value will change every time you login you Petkit app, so do not logoff your Petkit app unless necessary.
 - deviceId: this value indicate which device you wanna to control. If you just have one Petkit feeder mini, you can ignore this value.
+- groupId: EU discovery v2 needs this value. The v2 request body is `day=YYYYMMDD&groupId=...`. If you do not know it, the plugin will keep using the legacy discovery endpoint.
 
 here is a example of Quantumult X capture data page:
 
@@ -100,6 +101,7 @@ you can find X-Session data from the request header area and deviceId in respons
 |              location              | string |   yes    |                    'cn'                    | 'cn',<br>'asia',<br>'north_america',<br>'eu' | China users:'cn';<br>Asia users: 'asia';<br>North America users: 'north_america';<br>other location because lack of infomation, not sure it will work.<br/>You can find more info <a href="https://github.com/elfive/homebridge-petkit-feeder-mini/wiki/How-to-choose-server-location">here</a>. |
 |               model                | string |    no    |                'FeederMini'                |          'FeederMini',<br>'Feeder'           | Petkit Feeder Mini: 'FeederMini'<br>Petkit Feeder Element: 'Feeder'                                                                                                                                                                                                                              |
 |              deviceId              | string |   tbd    |                    ---                     |                     ---                      | your Petkit feeder mini Id, which is buildin your device, will never change. <br/>If you just have one Petkit feeder device, you can ignore this value.<br/>If you just have more than one Petkit Feeder device, you must set this value.                                                        |
+|              groupId               | string |    no    |                    ---                     |                     ---                      | EU discovery v2 uses this value as request input. The request body is `day=YYYYMMDD&groupId=...`. If you do not know it, the plugin will fall back to the legacy discovery endpoint.                                                                |
 |              headers               | array  |   yes    |                    ---                     |                     ---                      | http request headers.<br/>See more detail info at <a href="#headers field">headers field</a> below.                                                                                                                                                                                              |
 |         enable_http_retry          |        |    no    |                   false                    |                  true/false                  | Enable or disable HTTP retry function, useful when your device or homebridge has a bad internet connection.                                                                                                                                                                                      |
 |          http_retry_count          |  int   |    no    |                     3                      |                    1 to 5                    | max retry times when a http request failed.                                                                                                                                                                                                                                                      |
@@ -143,6 +145,7 @@ we recomand you entered all the headers you captured. If you don't want to do so
         ],
         "location": "cn",
         "model": "FeederMini",
+        "groupId": "",
         "enable_http_retry": false,
         "http_retry_count": 3,
         "DropMeal_name": "DropMeal",

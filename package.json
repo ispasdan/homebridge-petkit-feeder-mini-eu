@@ -1,6 +1,6 @@
 {
   "name": "homebridge-petkit-feeder-mini-eu",
-  "version": "2.3.0",
+  "version": "2.3.2",
   "description": "control your petkit feeder mini to feed your lovely pet, with eu api support",
   "main": "index.js",
   "scripts": {

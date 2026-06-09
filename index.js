@@ -649,17 +649,18 @@ class petkit_feeder_plugin {
                     this.log.error('initialize Petkit Feeder failed: could not find supported device.');
                     return;
                 }
+                const accessoryName = validDevice.name || format('{} {}', validDevice.type, validDevice.id);
+                const accessoryUuidSeed = validDevice.id !== undefined ? String(validDevice.id) : accessoryName;
                 config.set('deviceId', validDevice.id);
-                config.set('name', validDevice.name);
+                config.set('name', accessoryName);
                 config.set('model', validDevice.type);
 
-                // uuid must be generated from a unique but not changing data source,
-                // name should not be used in the most cases. But works in this specific example.
-                const uuid = UUIDGen.generate(validDevice.name);
+                // uuid must be generated from a unique but not changing data source.
+                const uuid = UUIDGen.generate(accessoryUuidSeed);
                 let petkitDevice = this.accessories.get(uuid);
                 if (!petkitDevice) {
                     // petkitDevice not exists, create petkitDevice and accessory
-                    let accessory = new this.api.platformAccessory(validDevice.name, uuid, validDevice.name);
+                    let accessory = new this.api.platformAccessory(accessoryName, uuid, accessoryName);
                     if (!accessory) {
                         this.log.error('initialize Petkit Feeder failed: could not create accessory');
                         return;
@@ -670,7 +671,7 @@ class petkit_feeder_plugin {
                     petkitDevice.config = config;
                 } else if (!petkitDevice.accessory) {
                     // accessory not exists, create accessory
-                    let accessory = new this.api.platformAccessory(validDevice.name, uuid, validDevice.name);
+                    let accessory = new this.api.platformAccessory(accessoryName, uuid, accessoryName);
                     if (!accessory) {
                         this.log.error('initialize Petkit Feeder failed: could not create accessory');
                         return;
@@ -713,7 +714,7 @@ class petkit_feeder_plugin {
     praseGetOwnedDevice(jsonObj) {
         if (!jsonObj) {
             this.log.error('praseGetOwnedDevice error: jsonObj is nothing.');
-            return false;
+            return [];
         }
         const jsonStr = JSON.stringify(jsonObj);
         this.log.debug(jsonStr);
@@ -721,29 +722,51 @@ class petkit_feeder_plugin {
         if (jsonObj.hasOwnProperty('error')) {
             this.log.error('server reply an error: ' + jsonStr);
             this.log.error('you may need to check your X-Session and other header configure');
-            return false;
+            return [];
         }
 
         if (!jsonObj.hasOwnProperty('result')) {
             this.log.error('JSON.parse error with:' + jsonStr);
-            return false;
+            return [];
         }
 
         if (!jsonObj.result.hasOwnProperty('devices')) {
             this.log.error('JSON.parse error with:' + jsonStr);
-            return false;
+            return [];
         }
 
         if (jsonObj.result.devices.length === 0) {
             this.log.error('seems you didn\'t owned a Petkit Feeder device.');
-            return false;
+            return [];
         }
+
+        const normalize_device = device => {
+            if (!device) {
+                return undefined;
+            }
+
+            if (device.data) {
+                return Object.assign({}, device.data, {
+                    type: device.type,
+                    groupId: device.groupId !== undefined ? device.groupId : device.data.groupId
+                });
+            }
+
+            const normalized_device = Object.assign({}, device);
+            if (!normalized_device.name) {
+                normalized_device.name = format('{} {}', normalized_device.type || 'PetkitDevice', normalized_device.id);
+            }
+            return normalized_device;
+        };
 
         var valid_devices = [];
         jsonObj.result.devices.forEach(device => {
             const index = globalVariables.support_device_type.indexOf(device.type);
-            if (index !== -1 && device.data) {
-                valid_devices.push(Object.assign(device.data, { 'type': device.type }));
+            if (index !== -1) {
+                const normalized_device = normalize_device(device);
+                if (normalized_device) {
+                    valid_devices.push(normalized_device);
+                }
             }
         });
         return valid_devices;
@@ -903,27 +926,48 @@ class petkit_feeder_plugin {
     async http_getOwnDevice(config) {
         const urls = config.get('urls');
         const discovery_urls = [];
+        const groupId = config.get('groupId');
 
         if (urls.owndevices_v2) {
-            discovery_urls.push(urls.owndevices_v2);
+            if (groupId) {
+                discovery_urls.push({
+                    url: urls.owndevices_v2,
+                    data: format('day={}&groupId={}', getDataString(), encodeURIComponent(groupId))
+                });
+            } else {
+                this.log.debug('skipping device discovery v2 because groupId is not configured.');
+            }
         }
         if (urls.owndevices) {
-            discovery_urls.push(urls.owndevices);
+            discovery_urls.push({ url: urls.owndevices });
         }
 
-        for (const url of discovery_urls) {
+        const is_valid_discovery_response = response => {
+            return response &&
+                !response.error &&
+                response.result &&
+                Array.isArray(response.result.devices);
+        };
+
+        for (const discovery_url of discovery_urls) {
+            const url = discovery_url.url;
             this.log.debug(format('trying device discovery endpoint: {}', url));
             const options = Object.assign(globalVariables.default_http_options, {
                 url: url,
                 headers: config.get('headers'),
-                responseType: 'json'
+                responseType: 'json',
+                data: discovery_url.data
             });
             const result = await this.http_request(options);
-            if (result) {
+            if (is_valid_discovery_response(result)) {
                 this.log.info(format('device discovery succeeded via: {}', url));
                 return result;
             }
-            this.log.warn(format('device discovery returned no data from: {}', url));
+            if (result && result.error) {
+                this.log.warn(format('device discovery failed via {}: {}', url, JSON.stringify(result.error)));
+            } else {
+                this.log.warn(format('device discovery returned an invalid payload from: {}', url));
+            }
         }
 
         this.log.error('device discovery failed for all configured endpoints.');

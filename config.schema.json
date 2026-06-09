@@ -111,6 +111,12 @@
             "required": false,
             "type": "string"
           },
+          "groupId": {
+            "title": "Petkit discovery group ID",
+            "description": "Required for the EU discovery_v2 endpoint. If you do not have this value, the plugin will fall back to the legacy discovery endpoint.",
+            "required": false,
+            "type": "string"
+          },
           "enable_http_retry": {
             "title": "Enable HTTP retry.",
             "description": "Enable or disable HTTP retry function, useful when your device or homebridge has a bad internet connection.",
@@ -330,6 +336,7 @@
           "items": [
             "devices[].location",
             "devices[].deviceId",
+            "devices[].groupId",
             "devices[].model",
             {
               "type": "section",
